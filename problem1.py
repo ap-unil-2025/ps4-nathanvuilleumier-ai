@@ -20,11 +20,23 @@ def create_number_list(start, end):
         [1, 2, 3, 4, 5]
     """
     # TODO: Implement this function
+    nums=[]
+    for n in range(start, end+1):
+        nums.append(n)
+    return nums
+    
     # Hint: Use range() and convert to list
-    pass
+    
 
 
 def filter_even_numbers(numbers):
+
+    l2=[]
+    for i in numbers:
+        if i%2==0:
+            l2.append(i)
+    return(l2)
+
     """
     Return a new list containing only the even numbers.
 
@@ -40,7 +52,7 @@ def filter_even_numbers(numbers):
     """
     # TODO: Implement this function
     # You can use a loop or list comprehension
-    pass
+    
 
 
 def square_numbers(numbers):
@@ -59,7 +71,12 @@ def square_numbers(numbers):
     """
     # TODO: Implement this function
     # Hint: Try a list comprehension!
-    pass
+    l=[]
+    for i in numbers:
+        i=i*i
+        l.append(i)
+    return (l)
+
 
 
 def find_max_min(numbers):
@@ -78,68 +95,67 @@ def find_max_min(numbers):
     """
     # TODO: Implement this function
     # You can use max() and min() built-in functions
-    pass
+    
+
+    return (max(numbers),min(numbers))
 
 
 def remove_duplicates(items):
     """
     Remove duplicate items from a list while preserving order.
-
-    Args:
-        items (list): List that may contain duplicates
-
-    Returns:
-        list: List with duplicates removed
-
-    Example:
-        >>> remove_duplicates([1, 2, 2, 3, 4, 3, 5])
-        [1, 2, 3, 4, 5]
     """
-    # TODO: Implement this function
-    # Hint: You can use a loop and check if item is already in result list
-    # Or convert to set and back to list (but this doesn't preserve order)
-    pass
+    result = []
+    for item in items:
+        if item not in result:   # keep first occurrence only
+            result.append(item)
+    return result
+
+
 
 
 def merge_lists(list1, list2):
     """
     Merge two lists, alternating elements from each.
     If one list is longer, append remaining elements.
-
-    Args:
-        list1 (list): First list
-        list2 (list): Second list
-
-    Returns:
-        list: Merged list with alternating elements
-
-    Example:
-        >>> merge_lists([1, 3, 5], [2, 4, 6])
-        [1, 2, 3, 4, 5, 6]
-        >>> merge_lists([1, 2], [10, 20, 30, 40])
-        [1, 10, 2, 20, 30, 40]
     """
-    # TODO: Implement this function
-    # Hint: Use a loop with index, handle different lengths
-    pass
+    result = []
+    i = j = 0
+    n1, n2 = len(list1), len(list2)
 
+    # Alternate while both have elements left
+    while i < n1 and j < n2:
+        result.append(list1[i]); i += 1
+        result.append(list2[j]); j += 1
 
+    # Append leftovers
+    if i < n1:
+        result.extend(list1[i:])
+    if j < n2:
+        result.extend(list2[j:])
+
+    return result
+
+    
 def list_statistics(numbers):
     """
     Calculate statistics for a list of numbers.
-
-    Args:
-        numbers (list): List of numbers
-
-    Returns:
-        dict: Dictionary with keys 'sum', 'average', 'count', 'max', 'min'
-
-    Example:
-        >>> list_statistics([1, 2, 3, 4, 5])
-        {'sum': 15, 'average': 3.0, 'count': 5, 'max': 5, 'min': 1}
+    Returns: dict with keys 'sum', 'average', 'count', 'max', 'min'
     """
     if not numbers:
-        return None
+        raise ValueError("numbers must be a non-empty list")
+
+    total = sum(numbers)
+    count = len(numbers)
+    avg = total / count
+
+    return {
+        'sum': total,
+        'average': avg,
+        'count': count,
+        'max': max(numbers),
+        'min': min(numbers)
+    }
+
 
     # TODO: Implement this function
     # Calculate and return a dictionary with the statistics
@@ -147,20 +163,15 @@ def list_statistics(numbers):
 
 
 def chunk_list(items, chunk_size):
-    """
-    Split a list into chunks of specified size.
+    if chunk_size <= 0:
+        raise ValueError("chunk_size must be a positive integer")
 
-    Args:
-        items (list): List to split
-        chunk_size (int): Size of each chunk
+    chunks = []
+    for i in range(0, len(items), chunk_size):
+        chunks.append(items[i:i + chunk_size])
+    return chunks
 
-    Returns:
-        list: List of lists (chunks)
-
-    Example:
-        >>> chunk_list([1, 2, 3, 4, 5, 6, 7], 3)
-        [[1, 2, 3], [4, 5, 6], [7]]
-    """
+    
     # TODO: Implement this function
     # Hint: Use list slicing in a loop
     pass
